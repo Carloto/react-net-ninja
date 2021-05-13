@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "title": "First",
+      "body": "I was here first...",
+      "author": "me?",
+      "id": 1
+    },
+    {
+      "title": "Aliens",
+      "body": "Can aliens breathe air?",
+      "author": "me?",
+      "id": 2
+    },
+    {
+      "title": "Response",
+      "body": "'Yes...",
+      "author": "alien",
+      "id": 3
+    }
+  ]
+}

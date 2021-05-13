@@ -2,27 +2,26 @@ import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    {title: 'First', body:'I was here first...', author: 'me?', id: 1},
-    {title: 'Aliens', body:'Can aliens breathe air?', author: 'me?', id: 2},
-    {title: 'Response', body:'Yes...', author: 'alien', id: 3}
-  ]);
-
-  const handleDelete = (id) => {
-    const newBlogs = blogs.filter(blog => blog.id !== id);
-    setBlogs(newBlogs);
-  }
+  const [blogs, setBlogs] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
-    console.log("effect triggered");
-    console.log(blogs);
-  })
+    setTimeout(() => {
+      fetch('http://localhost:8000/blogs').then(res => {
+        return res.json();
+      }).then(data => {
+        setBlogs(data);
+        setIsPending(false);
+      });
+    }, 1000);
+  }, []);
 
-  return ( 
+  return (
     <div className="home">
-      <BlogList blogs={blogs} title="All signals" handleDelete={handleDelete} />
+      {isPending && <div>Loading...</div>}
+      {blogs && <BlogList blogs={blogs} title="All signals" />}
     </div>
-   );
+  );
 }
- 
+
 export default Home;
